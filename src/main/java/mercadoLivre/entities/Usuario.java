@@ -1,10 +1,9 @@
 package mercadoLivre.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import mercadoLivre.configs.security.PasswordEncoder;
+import mercadoLivre.configs.security.SenhaLimpa;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Entity
@@ -29,9 +28,9 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String login, String senha) {
+    public Usuario(String login, SenhaLimpa senhaLimpa) {
         this.login = login;
-        this.senha = PasswordEncoder.SenhaLimpa(senha);
+        this.senha = senhaLimpa.hash();
     }
 
 
