@@ -15,7 +15,6 @@ public class Categoria {
     @Column(unique = true, nullable = false)
     private String nome;
 
-    @Positive
     @ManyToOne
     private Categoria categoriaMae;
 

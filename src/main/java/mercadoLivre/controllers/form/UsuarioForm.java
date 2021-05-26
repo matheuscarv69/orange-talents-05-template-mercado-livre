@@ -12,20 +12,20 @@ public class UsuarioForm {
 
     @NotBlank
     @Email
-    @UniqueValue(domainClass = Usuario.class, fieldName = "login", message = "{field.validation.email.duplicated}")
-    private String login;
+    @UniqueValue(domainClass = Usuario.class, fieldName = "email", message = "{field.validation.email.duplicated}")
+    private String email;
 
     @NotBlank
     @Length(min = 6)
     private String senha;
 
-    public UsuarioForm(String login, String senha) {
-        this.login = login;
+    public UsuarioForm(String email, String senha) {
+        this.email = email;
         this.senha = senha;
     }
 
     public Usuario converter() {
-        return new Usuario(this.login, new SenhaLimpa(this.senha));
+        return new Usuario(this.email, new SenhaLimpa(this.senha));
     }
 
 
