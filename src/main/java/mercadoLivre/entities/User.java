@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class User implements UserDetails {
@@ -31,7 +32,8 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String email, CleanPassword senhaLimpa) {
+    public User(String email,
+                CleanPassword senhaLimpa) {
         this.email = email;
         this.senha = senhaLimpa.hash();
     }

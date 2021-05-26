@@ -24,7 +24,7 @@ public class AuthService implements UserDetailsService {
             return optUsuario.get();
         }
 
-        throw new UsernameNotFoundException("{data.validation.login.invalid}");
+        throw new UsernameNotFoundException("Dados de login inválidos, corrija e tente novamente.");
     }
 
 }
