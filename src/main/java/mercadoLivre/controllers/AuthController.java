@@ -28,7 +28,7 @@ public class AuthController {
 
     @PostMapping
     public ResponseEntity<AuthTokenDto> autenticar(@RequestBody @Valid AuthForm authForm) {
-        UsernamePasswordAuthenticationToken loginData = authForm.converter();
+        UsernamePasswordAuthenticationToken loginData = authForm.toModelUserNamePassword();
 
         try {
             Authentication auth = authManager.authenticate(loginData);

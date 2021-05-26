@@ -1,7 +1,7 @@
 package mercadoLivre.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import mercadoLivre.configs.security.SenhaLimpa;
+import mercadoLivre.configs.security.CleanPassword;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
-public class Usuario implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +28,10 @@ public class Usuario implements UserDetails {
 
     // only hibernate
     @Deprecated
-    public Usuario() {
+    public User() {
     }
 
-    public Usuario(String email, SenhaLimpa senhaLimpa) {
+    public User(String email, CleanPassword senhaLimpa) {
         this.email = email;
         this.senha = senhaLimpa.hash();
     }

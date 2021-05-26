@@ -1,7 +1,7 @@
 package mercadoLivre.configs.security;
 
-import mercadoLivre.entities.Usuario;
-import mercadoLivre.repositories.UsuarioRepository;
+import mercadoLivre.entities.User;
+import mercadoLivre.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,11 +14,11 @@ import java.util.Optional;
 public class AuthService implements UserDetailsService {
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Usuario> optUsuario = usuarioRepository.findByEmail(username);
+        Optional<User> optUsuario = userRepository.findByEmail(username);
 
         if(optUsuario.isPresent()){
             return optUsuario.get();

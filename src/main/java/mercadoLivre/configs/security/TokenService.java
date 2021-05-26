@@ -3,7 +3,7 @@ package mercadoLivre.configs.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import mercadoLivre.entities.Usuario;
+import mercadoLivre.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class TokenService {
     private String secret;
 
     public String generateToken(Authentication auth) {
-        Usuario userLogged = (Usuario) auth.getPrincipal();
+        User userLogged = (User) auth.getPrincipal();
 
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + Long.parseLong(this.expiration));
@@ -34,7 +34,7 @@ public class TokenService {
                 .compact();
     }
 
-    public boolean isTokenValido(String token) {
+    public boolean isTokenValid(String token) {
         try {
             Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
             return true;

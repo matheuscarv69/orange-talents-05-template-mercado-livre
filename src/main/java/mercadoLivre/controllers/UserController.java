@@ -1,8 +1,8 @@
 package mercadoLivre.controllers;
 
-import mercadoLivre.controllers.form.CategoriaForm;
-import mercadoLivre.entities.Categoria;
-import mercadoLivre.repositories.CategoriaRepository;
+import mercadoLivre.controllers.form.UserForm;
+import mercadoLivre.entities.User;
+import mercadoLivre.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,19 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/categorias")
-public class CategoriaController {
+@RequestMapping("/api/usuarios")
+public class UserController {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private UserRepository userRepository;
 
     @PostMapping
-    public ResponseEntity<?> cadastra(@RequestBody @Valid CategoriaForm categoriaForm) {
-        Categoria categoria = categoriaForm.converter(categoriaRepository);
+    public ResponseEntity<?> cadastrar(@RequestBody @Valid UserForm userForm) {
+        User usuario = userForm.toModel();
 
-        categoriaRepository.save(categoria);
+        userRepository.save(usuario);
 
         return ResponseEntity.ok().build();
     }
-
 }

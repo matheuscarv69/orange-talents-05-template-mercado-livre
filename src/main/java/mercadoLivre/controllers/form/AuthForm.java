@@ -1,7 +1,7 @@
 package mercadoLivre.controllers.form;
 
 import mercadoLivre.configs.validation.exists.ExistsId;
-import mercadoLivre.entities.Usuario;
+import mercadoLivre.entities.User;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 public class AuthForm {
 
     @NotBlank
-    @ExistsId(domainClass = Usuario.class, fieldName = "email", message = "{email.validation.login.not-exists}")
+    @ExistsId(domainClass = User.class, fieldName = "email", message = "{email.validation.login.not-exists}")
     private String email;
 
     @NotBlank
@@ -22,7 +22,7 @@ public class AuthForm {
         this.senha = senha;
     }
 
-    public UsernamePasswordAuthenticationToken converter() {
+    public UsernamePasswordAuthenticationToken toModelUserNamePassword() {
         return new UsernamePasswordAuthenticationToken(this.email, this.senha);
     }
 

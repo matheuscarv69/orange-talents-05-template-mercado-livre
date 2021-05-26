@@ -2,10 +2,9 @@ package mercadoLivre.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 
 @Entity
-public class Categoria {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,18 +15,18 @@ public class Categoria {
     private String nome;
 
     @ManyToOne
-    private Categoria categoriaMae;
+    private Category categoriaMae;
 
-    public Categoria(String nome) {
+    public Category(String nome) {
         this.nome = nome;
     }
 
     // only hibernate
     @Deprecated
-    public Categoria() {
+    public Category() {
     }
 
-    public void setCategoriaMae(Categoria categoriaMae) {
+    public void setCategoriaMae(Category categoriaMae) {
         this.categoriaMae = categoriaMae;
     }
 }

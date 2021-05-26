@@ -1,7 +1,7 @@
 package mercadoLivre.configs.security;
 
-import mercadoLivre.entities.Usuario;
-import mercadoLivre.repositories.UsuarioRepository;
+import mercadoLivre.entities.User;
+import mercadoLivre.repositories.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,17 +15,17 @@ import java.io.IOException;
 public class AuthViaTokenFilter extends OncePerRequestFilter {
 
     private TokenService tokenService;
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
-    public AuthViaTokenFilter(TokenService tokenService, UsuarioRepository usuarioRepository) {
+    public AuthViaTokenFilter(TokenService tokenService, UserRepository userRepository) {
         this.tokenService = tokenService;
-        this.usuarioRepository = usuarioRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = getToken(request);
-        boolean tokenIsValid = tokenService.isTokenValido(token);
+        boolean tokenIsValid = tokenService.isTokenValid(token);
 
         if (tokenIsValid) {
             authenticateUser(token);
@@ -37,7 +37,7 @@ public class AuthViaTokenFilter extends OncePerRequestFilter {
     private void authenticateUser(String token) {
         Long userId = tokenService.getIdUsuario(token);
 
-        Usuario user = usuarioRepository.findById(userId).get();
+        User user = userRepository.findById(userId).get();
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
