@@ -1,4 +1,4 @@
-package mercadoLivre.configs.validation;
+package mercadoLivre.configs.validation.uniqueValue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;

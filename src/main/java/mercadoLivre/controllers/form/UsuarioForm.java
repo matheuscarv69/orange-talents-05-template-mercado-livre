@@ -1,13 +1,12 @@
 package mercadoLivre.controllers.form;
 
 import mercadoLivre.configs.security.SenhaLimpa;
-import mercadoLivre.configs.validation.UniqueValue;
+import mercadoLivre.configs.validation.uniqueValue.UniqueValue;
 import mercadoLivre.entities.Usuario;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 public class UsuarioForm {
 

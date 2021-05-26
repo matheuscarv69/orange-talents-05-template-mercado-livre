@@ -1,4 +1,4 @@
-package mercadoLivre.configs;
+package mercadoLivre.configs.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {

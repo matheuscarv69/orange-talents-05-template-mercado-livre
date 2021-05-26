@@ -1,4 +1,4 @@
-package mercadoLivre.configs;
+package mercadoLivre.configs.validation;
 
 public class ExceptionFormDto {
 
