@@ -1,6 +1,7 @@
 package mercadoLivre.entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class FeatureProduct {
@@ -18,13 +19,6 @@ public class FeatureProduct {
     @ManyToOne
     private Product produto;
 
-//    public FeatureProduct(String nome,
-//                          String descricao){
-//        this.nome = nome;
-//        this.descricao = descricao;
-//    }
-
-
     public FeatureProduct(String nome, String descricao, Product produto) {
         this.nome = nome;
         this.descricao = descricao;
@@ -34,5 +28,18 @@ public class FeatureProduct {
     // only hibernate
     @Deprecated
     public FeatureProduct() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FeatureProduct)) return false;
+        FeatureProduct that = (FeatureProduct) o;
+        return nome.equals(that.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome);
     }
 }

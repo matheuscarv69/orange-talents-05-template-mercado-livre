@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Product {
@@ -55,21 +56,13 @@ public class Product {
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
-        this.caracteristicas = featureFormToFeatureProduct(caracteristicasForm);
+        this.caracteristicas = caracteristicasForm
+                .stream()
+                .map(featureProductForm -> featureProductForm.toModel(this))
+                .collect(Collectors.toSet());
         this.descricao = descricao;
         this.categoria = categoria;
         this.usuario = usuario;
-    }
-
-    public Set<FeatureProduct> featureFormToFeatureProduct(Set<FeatureProductForm> caracteristicasForm){
-        Set<FeatureProduct> featureProductsSet = new HashSet<>();
-
-        caracteristicasForm.forEach(featureProductForm -> {
-            FeatureProduct featureProduct = featureProductForm.toModel(this);
-            featureProductsSet.add(featureProduct);
-        });
-
-        return featureProductsSet;
     }
 
     // only hibernate
