@@ -1,6 +1,6 @@
 package mercadoLivre.configs.security;
 
-import mercadoLivre.repositories.UserRepository;
+import mercadoLivre.entities.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

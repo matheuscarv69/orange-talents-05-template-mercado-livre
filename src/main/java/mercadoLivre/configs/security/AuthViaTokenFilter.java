@@ -1,7 +1,7 @@
 package mercadoLivre.configs.security;
 
-import mercadoLivre.entities.User;
-import mercadoLivre.repositories.UserRepository;
+import mercadoLivre.entities.user.entities.User;
+import mercadoLivre.entities.user.repository.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;

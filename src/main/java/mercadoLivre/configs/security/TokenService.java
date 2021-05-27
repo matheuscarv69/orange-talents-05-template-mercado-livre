@@ -3,7 +3,7 @@ package mercadoLivre.configs.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import mercadoLivre.entities.User;
+import mercadoLivre.entities.user.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
