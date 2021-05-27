@@ -16,7 +16,8 @@ public class ImageProduct {
     @ManyToOne
     private Product produto;
 
-    public ImageProduct(String link, Product produto) {
+    public ImageProduct(String link,
+                        Product produto) {
         this.link = link;
         this.produto = produto;
     }

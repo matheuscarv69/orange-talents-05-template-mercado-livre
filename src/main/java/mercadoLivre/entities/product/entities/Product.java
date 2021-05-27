@@ -36,7 +36,7 @@ public class Product {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
     private Set<FeatureProduct> caracteristicas = new HashSet<>();
 
-    @Length(max = 1000)
+    @Column(length = 1000)
     private String descricao;
 
     @OneToOne
@@ -51,6 +51,9 @@ public class Product {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<ImageProduct> images = new HashSet<>();
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Set<Opnion> opinioes = new HashSet<>();
 
     public Product(String nome,
                    BigDecimal preco,
@@ -90,6 +93,10 @@ public class Product {
         this.images.addAll(imagesProduct);
     }
 
+    public void addOpnion(Opnion opnion) {
+        opinioes.add(opnion);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,4 +109,5 @@ public class Product {
     public int hashCode() {
         return Objects.hash(id, nome);
     }
+
 }

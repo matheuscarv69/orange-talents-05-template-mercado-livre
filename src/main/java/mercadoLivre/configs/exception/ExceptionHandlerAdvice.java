@@ -22,14 +22,14 @@ public class ExceptionHandlerAdvice {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<ExceptionFormDto> handleValidationException(MethodArgumentNotValidException exception) {
-        List<ExceptionFormDto> errorsDtoList = new ArrayList<>();
+    public List<ExceptionDto> handleValidationException(MethodArgumentNotValidException exception) {
+        List<ExceptionDto> errorsDtoList = new ArrayList<>();
 
         List<FieldError> fieldErrorsList = exception.getBindingResult().getFieldErrors();
 
         fieldErrorsList.forEach(fieldError -> {
             String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-            ExceptionFormDto erroDto = new ExceptionFormDto(fieldError.getField(), message);
+            ExceptionDto erroDto = new ExceptionDto(fieldError.getField(), message);
             errorsDtoList.add(erroDto);
         });
 

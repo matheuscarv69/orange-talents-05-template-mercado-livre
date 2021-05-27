@@ -19,7 +19,9 @@ public class FeatureProduct {
     @ManyToOne
     private Product produto;
 
-    public FeatureProduct(String nome, String descricao, Product produto) {
+    public FeatureProduct(String nome,
+                          String descricao,
+                          Product produto) {
         this.nome = nome;
         this.descricao = descricao;
         this.produto = produto;

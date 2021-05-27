@@ -13,7 +13,8 @@ public class FeatureProductForm {
     @NotBlank
     private String descricao;
 
-    public FeatureProductForm(String nome, String descricao) {
+    public FeatureProductForm(String nome,
+                              String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
