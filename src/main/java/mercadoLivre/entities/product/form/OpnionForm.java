@@ -31,15 +31,11 @@ public class OpnionForm {
     }
 
     public Opnion toModel(Product produto, User usuario) {
-        return new Opnion(this.titulo, this.descricao, this.nota, usuario, produto);
+        return new Opnion(this.titulo,
+                this.descricao,
+                this.nota,
+                usuario,
+                produto);
     }
 
-    @Override
-    public String toString() {
-        return "OpnionForm{" +
-                "titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", nota=" + nota +
-                '}';
-    }
 }

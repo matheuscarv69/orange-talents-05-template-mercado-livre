@@ -1,4 +1,4 @@
-package mercadoLivre.entities.user.form;
+package mercadoLivre.entities.user.auth;
 
 import mercadoLivre.configs.validation.exists.ExistsId;
 import mercadoLivre.entities.user.entities.User;

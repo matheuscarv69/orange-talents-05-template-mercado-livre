@@ -10,6 +10,7 @@ import java.util.Locale;
 
 @Configuration
 public class InternConfigs {
+
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();

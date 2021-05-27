@@ -1,4 +1,4 @@
-package mercadoLivre.entities.user.dto;
+package mercadoLivre.entities.user.auth;
 
 public class AuthTokenDto {
 

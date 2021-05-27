@@ -7,6 +7,8 @@ import mercadoLivre.entities.user.entities.User;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,20 +24,25 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Column(nullable = false)
     private String nome;
 
     @Positive
+    @NotNull
     @Column(nullable = false)
     private BigDecimal preco;
 
     @Positive
+    @NotNull
     @Column(nullable = false)
     private Integer quantidade;
 
+    @NotNull
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
     private Set<FeatureProduct> caracteristicas = new HashSet<>();
 
+    @NotBlank
     @Column(length = 1000)
     private String descricao;
 
@@ -49,9 +56,11 @@ public class Product {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
+    @NotNull
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<ImageProduct> images = new HashSet<>();
 
+    @NotNull
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Opnion> opinioes = new HashSet<>();
 

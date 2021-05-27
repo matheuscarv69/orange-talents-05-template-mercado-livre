@@ -7,13 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Component
 @Primary
-public class UploaderFile implements Uploader {
+@Component
+public class UploaderFile implements UploaderInterface {
 
     @Override
     public Set<String> uploadImages(Set<MultipartFile> newImagesProductForm) {
-        System.out.println("DEv");
         return newImagesProductForm
                 .stream()
                 .map(image ->

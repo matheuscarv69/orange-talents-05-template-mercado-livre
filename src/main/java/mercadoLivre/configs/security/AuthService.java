@@ -1,27 +1,29 @@
 package mercadoLivre.configs.security;
 
 import mercadoLivre.entities.user.entities.User;
-import mercadoLivre.entities.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 @Service
 public class AuthService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    EntityManager manager;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optUsuario = userRepository.findByEmail(username);
+        Query query = manager.createQuery("select user from User user where user.email = :username");
+        query.setParameter("username", username);
+        User user1 = (User) query.getSingleResult();
 
-        if(optUsuario.isPresent()){
-            return optUsuario.get();
+        if (user1 != null) {
+            return user1;
         }
 
         throw new UsernameNotFoundException("Dados de login inválidos, corrija e tente novamente.");

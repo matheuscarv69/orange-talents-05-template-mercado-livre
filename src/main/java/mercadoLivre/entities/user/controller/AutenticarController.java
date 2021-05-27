@@ -1,8 +1,8 @@
 package mercadoLivre.entities.user.controller;
 
 import mercadoLivre.configs.security.TokenService;
-import mercadoLivre.entities.user.dto.AuthTokenDto;
-import mercadoLivre.entities.user.form.AuthForm;
+import mercadoLivre.entities.user.auth.AuthTokenDto;
+import mercadoLivre.entities.user.auth.AuthForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class AutenticarController {
 
     @Autowired
     private AuthenticationManager authManager;

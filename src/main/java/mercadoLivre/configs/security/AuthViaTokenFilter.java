@@ -1,11 +1,11 @@
 package mercadoLivre.configs.security;
 
 import mercadoLivre.entities.user.entities.User;
-import mercadoLivre.entities.user.repository.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.persistence.EntityManager;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +15,11 @@ import java.io.IOException;
 public class AuthViaTokenFilter extends OncePerRequestFilter {
 
     private TokenService tokenService;
-    private UserRepository userRepository;
+    private EntityManager manager;
 
-    public AuthViaTokenFilter(TokenService tokenService, UserRepository userRepository) {
+    public AuthViaTokenFilter(TokenService tokenService, EntityManager manager) {
         this.tokenService = tokenService;
-        this.userRepository = userRepository;
+        this.manager = manager;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AuthViaTokenFilter extends OncePerRequestFilter {
     private void authenticateUser(String token) {
         Long userId = tokenService.getIdUsuario(token);
 
-        User user = userRepository.findById(userId).get();
+        User user = manager.find(User.class, userId);
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);

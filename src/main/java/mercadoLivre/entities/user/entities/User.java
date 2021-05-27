@@ -2,10 +2,13 @@ package mercadoLivre.entities.user.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import mercadoLivre.entities.user.utils.CleanPassword;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
@@ -17,9 +20,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Email
     @Column(unique = true, nullable = false)
     private String email;
 
+    @NotBlank
+    @Length(min = 6)
     @Column(nullable = false)
     private String senha;
 

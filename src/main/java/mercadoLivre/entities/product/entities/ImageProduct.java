@@ -1,6 +1,8 @@
 package mercadoLivre.entities.product.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -10,9 +12,11 @@ public class ImageProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Column(nullable = false)
     private String link;
 
+    @NotNull
     @ManyToOne
     private Product produto;
 

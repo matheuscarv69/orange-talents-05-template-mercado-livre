@@ -3,8 +3,8 @@ package mercadoLivre.entities.category.form;
 import mercadoLivre.configs.validation.exists.ExistsId;
 import mercadoLivre.configs.validation.uniqueValue.UniqueValue;
 import mercadoLivre.entities.category.entity.Category;
-import mercadoLivre.entities.category.repository.CategoryRepository;
 
+import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
@@ -23,9 +23,9 @@ public class CategoryForm {
         this.idCategoriaMae = idCategoriaMae;
     }
 
-    public Category toModel(CategoryRepository categoryRepository) {
+    public Category toModel(EntityManager manager) {
         if (idCategoriaMae != null) {
-            Category categoriaMae = categoryRepository.findById(idCategoriaMae).get();
+            Category categoriaMae = manager.find(Category.class, this.idCategoriaMae);
 
             Category categoria = new Category(this.nome);
             categoria.setCategoriaMae(categoriaMae);

@@ -1,8 +1,7 @@
 package mercadoLivre.entities.user.controller;
 
-import mercadoLivre.entities.user.form.UserForm;
 import mercadoLivre.entities.user.entities.User;
-import mercadoLivre.entities.user.repository.UserRepository;
+import mercadoLivre.entities.user.form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,20 +9,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/usuarios")
-public class UserController {
+public class CadastrarUserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private EntityManager manager;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<?> cadastrar(@RequestBody @Valid UserForm userForm) {
         User usuario = userForm.toModel();
 
-        userRepository.save(usuario);
+        manager.persist(usuario);
 
         return ResponseEntity.ok().build();
     }

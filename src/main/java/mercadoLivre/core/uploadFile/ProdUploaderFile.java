@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class ProdUploaderFile implements Uploader {
+public class ProdUploaderFile implements UploaderInterface {
 
     @Override
     public Set<String> uploadImages(Set<MultipartFile> newImagesProductForm) {
