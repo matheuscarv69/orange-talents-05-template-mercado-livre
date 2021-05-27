@@ -9,6 +9,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,9 @@ public class Product {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private Set<ImageProduct> images = new HashSet<>();
+
     public Product(String nome,
                    BigDecimal preco,
                    Integer quantidade,
@@ -70,4 +74,30 @@ public class Product {
     public Product() {
     }
 
+    public boolean isProductOwner(User usuario) {
+        return this.usuario.equals(usuario);
+    }
+
+    public void addImages(Set<String> imagesLinks) {
+        Set<ImageProduct> imagesProduct = imagesLinks
+                .stream()
+                .map(link ->
+                        new ImageProduct(link, this)
+                ).collect(Collectors.toSet());
+
+        this.images.addAll(imagesProduct);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return id.equals(product.id) && nome.equals(product.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome);
+    }
 }
