@@ -1,5 +1,6 @@
 package mercadoLivre.entities.product.controller;
 
+import io.jsonwebtoken.lang.Assert;
 import mercadoLivre.entities.product.entities.Opnion;
 import mercadoLivre.entities.product.entities.Product;
 import mercadoLivre.entities.product.form.OpnionForm;
@@ -27,6 +28,8 @@ public class AddOpnionController {
                                             @AuthenticationPrincipal User userLogged) {
 
         Product produto = manager.find(Product.class, id);
+        Assert.notNull(produto, "Produto está nulo");
+
         Opnion opniao = opnionForm.toModel(produto, userLogged);
 
         produto.addOpnion(opniao);

@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Opnion {
@@ -53,6 +54,31 @@ public class Opnion {
     // only hibernate
     @Deprecated
     public Opnion() {
+    }
+
+    public static Integer averageNota(Set<Opnion> opnions) {
+        if(opnions.isEmpty()){
+            return 0;
+        }
+        int totalNotas = 0;
+
+        for (Opnion opnion : opnions) {
+            totalNotas += opnion.getNota();
+        }
+
+        return totalNotas / opnions.size();
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Integer getNota() {
+        return nota;
     }
 
     @Override

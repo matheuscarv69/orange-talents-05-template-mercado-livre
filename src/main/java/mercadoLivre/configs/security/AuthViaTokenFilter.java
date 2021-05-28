@@ -1,9 +1,11 @@
 package mercadoLivre.configs.security;
 
 import mercadoLivre.entities.user.entities.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
 import javax.servlet.FilterChain;
@@ -38,6 +40,10 @@ public class AuthViaTokenFilter extends OncePerRequestFilter {
         Long userId = tokenService.getIdUsuario(token);
 
         User user = manager.find(User.class, userId);
+
+        if(user == null){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuário não está autenticado");
+        }
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);

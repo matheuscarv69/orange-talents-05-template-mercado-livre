@@ -18,7 +18,9 @@ public class QuestionForm {
     }
 
     public Question toModel(User userLogged, Product product){
-        return new Question(this.titulo, userLogged, product);
+        return new Question(this.titulo,
+                userLogged,
+                product);
     }
 
 

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import mercadoLivre.entities.category.entity.Category;
 import mercadoLivre.entities.product.form.FeatureProductForm;
 import mercadoLivre.entities.user.entities.User;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -39,7 +38,7 @@ public class Product {
     private Integer quantidade;
 
     @NotNull
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<FeatureProduct> caracteristicas = new HashSet<>();
 
     @NotBlank
@@ -63,6 +62,10 @@ public class Product {
     @NotNull
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Opnion> opinioes = new HashSet<>();
+
+    @NotNull
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Set<Question> perguntas = new HashSet<>();
 
     public Product(String nome,
                    BigDecimal preco,
@@ -106,6 +109,54 @@ public class Product {
         opinioes.add(opnion);
     }
 
+    public void addQuestion(Question question) {
+        perguntas.add(question);
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public Set<FeatureProduct> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public String getCategoria() {
+        return categoria.getNome();
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public Set<ImageProduct> getImages() {
+        return images;
+    }
+
+    public Set<Opnion> getOpinioes() {
+        return opinioes;
+    }
+
+    public Set<Question> getPerguntas() {
+        return perguntas;
+    }
+
+    public Integer getQuantidadeOpnions() {
+        return opinioes.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -118,5 +169,4 @@ public class Product {
     public int hashCode() {
         return Objects.hash(id, nome);
     }
-
 }

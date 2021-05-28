@@ -29,4 +29,8 @@ public class Category {
     public void setCategoriaMae(Category categoriaMae) {
         this.categoriaMae = categoriaMae;
     }
+
+    public String getNome() {
+        return nome;
+    }
 }

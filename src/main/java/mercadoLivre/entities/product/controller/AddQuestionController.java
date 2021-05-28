@@ -2,7 +2,6 @@ package mercadoLivre.entities.product.controller;
 
 import io.jsonwebtoken.lang.Assert;
 import mercadoLivre.core.emailCente.EmailCenter;
-import mercadoLivre.core.emailCente.GmailSender;
 import mercadoLivre.entities.product.entities.Product;
 import mercadoLivre.entities.product.entities.Question;
 import mercadoLivre.entities.product.form.QuestionForm;
@@ -24,21 +23,22 @@ public class AddQuestionController {
     private EntityManager manager;
 
     @Autowired
-    private GmailSender gmailSender;
+    private EmailCenter gmailSender;
 
     @PostMapping("/{id}/question")
     @Transactional
     public ResponseEntity<?> adicionaPergunta(@PathVariable Long id,
                                               @RequestBody @Valid QuestionForm questionForm,
                                               @AuthenticationPrincipal User userLogged) {
-        Product product = manager.find(Product.class, id);
+        Product produto = manager.find(Product.class, id);
+        Assert.notNull(produto, "Produto está nulo");
 
-        Assert.notNull(product, "Produto está nulo");
+        Question question = questionForm.toModel(userLogged, produto);
 
-        Question question = questionForm.toModel(userLogged, product);
+        produto.addQuestion(question);
+
+        manager.persist(produto);
         gmailSender.send(question);
-
-        manager.persist(question);
 
         return ResponseEntity.ok().build();
     }

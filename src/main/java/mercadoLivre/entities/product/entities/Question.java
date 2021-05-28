@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 public class Question {
@@ -43,5 +44,28 @@ public class Question {
     public Question() {
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
 
+    public LocalDateTime getCriadoEm() {
+        return criadoEm;
+    }
+
+    public String getCliente() {
+        return cliente.getUsername();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Question)) return false;
+        Question question = (Question) o;
+        return titulo.equals(question.titulo) && cliente.equals(question.cliente) && produto.equals(question.produto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo, cliente, produto);
+    }
 }

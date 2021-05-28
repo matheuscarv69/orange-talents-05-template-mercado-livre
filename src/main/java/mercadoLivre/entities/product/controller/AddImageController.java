@@ -1,5 +1,6 @@
 package mercadoLivre.entities.product.controller;
 
+import io.jsonwebtoken.lang.Assert;
 import mercadoLivre.core.uploadFile.UploaderInterface;
 import mercadoLivre.entities.product.entities.Product;
 import mercadoLivre.entities.product.form.NewImagesProductForm;
@@ -35,6 +36,7 @@ public class AddImageController {
                                             @Valid NewImagesProductForm newImagesProductForm,
                                             @AuthenticationPrincipal User userLogged) {
         Product produto = manager.find(Product.class, id);
+        Assert.notNull(produto, "Produto está nulo");
 
         if (!produto.isProductOwner(userLogged)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Usuário não é dono do Produto");
@@ -44,7 +46,6 @@ public class AddImageController {
         produto.addImages(linksImages);
 
         manager.merge(produto);
-
 
         return ResponseEntity.ok().build();
     }
