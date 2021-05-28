@@ -22,7 +22,7 @@ public class AddOpnionController {
 
     @PostMapping("/{id}/opnions")
     @Transactional
-    public ResponseEntity<?> adicionaOpniao(@PathVariable Long id,
+    public ResponseEntity<?> adicionaOpiniao(@PathVariable Long id,
                                             @RequestBody @Valid OpnionForm opnionForm,
                                             @AuthenticationPrincipal User userLogged) {
 
