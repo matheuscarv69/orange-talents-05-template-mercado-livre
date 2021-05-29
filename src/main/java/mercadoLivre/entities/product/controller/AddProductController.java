@@ -4,6 +4,7 @@ import mercadoLivre.entities.product.entities.Product;
 import mercadoLivre.entities.product.form.ProductForm;
 import mercadoLivre.entities.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;

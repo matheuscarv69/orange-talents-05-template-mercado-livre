@@ -1,7 +1,7 @@
 package mercadoLivre.entities.product.controller;
 
 import io.jsonwebtoken.lang.Assert;
-import mercadoLivre.core.emailCente.EmailCenter;
+import mercadoLivre.core.emailCenter.EmailCenter;
 import mercadoLivre.entities.product.entities.Product;
 import mercadoLivre.entities.product.entities.Question;
 import mercadoLivre.entities.product.form.QuestionForm;
@@ -38,7 +38,7 @@ public class AddQuestionController {
         produto.addQuestion(question);
 
         manager.persist(produto);
-        gmailSender.send(question);
+        gmailSender.sendQuestion(question);
 
         return ResponseEntity.ok().build();
     }

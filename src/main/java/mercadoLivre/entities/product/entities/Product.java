@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import mercadoLivre.entities.category.entity.Category;
 import mercadoLivre.entities.product.form.FeatureProductForm;
 import mercadoLivre.entities.user.entities.User;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -32,7 +34,7 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal preco;
 
-    @Positive
+    @Min(0)
     @NotNull
     @Column(nullable = false)
     private Integer quantidade;
@@ -113,6 +115,18 @@ public class Product {
         perguntas.add(question);
     }
 
+    public boolean abateEstoque(Integer quantidadeDesejada) {
+
+        if (this.quantidade >= quantidadeDesejada) {
+            this.quantidade -= quantidadeDesejada;
+            return true;
+        }
+
+        Assert.isTrue(quantidadeDesejada > this.quantidade, "A quantidade desejada é superior ao estoque.");
+
+        return false;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -135,6 +149,10 @@ public class Product {
 
     public String getCategoria() {
         return categoria.getNome();
+    }
+
+    public String getEmailUsuario() {
+        return usuario.getUsername();
     }
 
     public LocalDateTime getDataCriacao() {
