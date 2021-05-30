@@ -127,6 +127,10 @@ public class Product {
         return false;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -153,6 +157,14 @@ public class Product {
 
     public String getEmailUsuario() {
         return usuario.getUsername();
+    }
+
+    public Long getIdUsuario() {
+        return usuario.getId();
+    }
+
+    public User getUsuario() {
+        return usuario;
     }
 
     public LocalDateTime getDataCriacao() {

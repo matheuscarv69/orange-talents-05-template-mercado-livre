@@ -9,7 +9,7 @@ public enum Gateway {
     paypal {
         @Override
         public String efetuaPagamento(UUID uuidCompra, UriComponentsBuilder uriBuilder) {
-            String url = uriBuilder.path("/api/buyProducts/{uuidCompra}").buildAndExpand(uuidCompra).toUriString();
+            String url = uriBuilder.path("/retorno-paypal/{uuidCompra}").buildAndExpand(uuidCompra).toUriString();
 
             return "paypal.com?buyerId=" + uuidCompra.toString() + "&redirectUrl=" + url;
         }
@@ -17,7 +17,7 @@ public enum Gateway {
     pagseguro {
         @Override
         public String efetuaPagamento(UUID uuidCompra, UriComponentsBuilder uriBuilder) {
-            String url = uriBuilder.path("/api/buyProducts/{uuidCompra}").buildAndExpand(uuidCompra).toUriString();
+            String url = uriBuilder.path("/retorno-pagseguro/{uuidCompra}").buildAndExpand(uuidCompra).toUriString();
 
             return "pagseguro.co?returnId=" + uuidCompra.toString() + "&redirectUrl=" + url;
         }

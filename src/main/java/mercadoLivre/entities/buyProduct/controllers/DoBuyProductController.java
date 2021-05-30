@@ -1,7 +1,7 @@
 package mercadoLivre.entities.buyProduct.controllers;
 
 import mercadoLivre.core.emailCenter.EmailCenter;
-import mercadoLivre.entities.buyProduct.dto.NotificationBuyProduct;
+import mercadoLivre.entities.buyProduct.dto.NotificationBuyProductSeller;
 import mercadoLivre.entities.buyProduct.entities.BuyProduct;
 import mercadoLivre.core.gateway.Gateway;
 import mercadoLivre.entities.buyProduct.form.BuyProductForm;
@@ -50,12 +50,12 @@ public class DoBuyProductController {
             manager.persist(produto);
             manager.persist(compra);
 
-            emailCenter.sendNotificationBuy(new NotificationBuyProduct(produto));
+            emailCenter.sendNotificationBuySeller(new NotificationBuyProductSeller(produto));
 
             return ResponseEntity.status(HttpStatus.FOUND).body(url);
         }
 
-        return ResponseEntity.badRequest().body("Hummm, algo deu errado");
+        return ResponseEntity.badRequest().body("Hummm, algo deu errado na compra do produto: quantidade disponível " + produto.getQuantidade());
     }
 
 }
